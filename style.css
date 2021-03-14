@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, Ubuntu Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin: 10px auto;
+    min-width: 500px;
+    max-width: 75%;
+}
+
+
+form ul {
+    margin: 5px;
+}
