@@ -8,11 +8,34 @@ h1 {
 
 form {
     margin: 10px auto;
-    min-width: 500px;
-    max-width: 75%;
+    max-width: 500px;
+    width: 90%;
 }
 
 
 form ul {
     margin: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+}
+
+form li {
+    margin: 10px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+form label {
+    width: 100px;
+}
+
+form input[type="text"] {
+    box-sizing: content-box;
+    width: 100%;
+}
+
+form select {
+     width: 100%;
 }
