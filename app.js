@@ -2,6 +2,7 @@
 function str_to_list(string) {
     let list = string.split(',')
     list = list.map(i => i.trim())
+    list = list.filter(i => i!=="")
     return list
 }
 
@@ -10,9 +11,9 @@ function list_to_str(list) {
     let string = ""
     for(let i = 0; i<list.length; i++) {
         if(i===0){
-            string = string + String(i)
+            string = string + String(list[i])
         } else {
-            string = string + ', ' + String(i)
+            string = string + ', ' + String(list[i])
         }
     }
     return string
@@ -58,3 +59,29 @@ function divide_in_random_groups(list, n=1){
     new_list = reorder_list(new_list)
     return new_list
 }
+
+const integrantes_input = document.getElementById("input-integrantes")
+const ejercicios_input = document.getElementById("input-ejercicios")
+const ejercicios_output = document.getElementById("output-ejercicios")
+
+function rifar_button_event(){
+    const integrantes_list = str_to_list(integrantes_input.value)
+    const ejercicios_list = str_to_list(ejercicios_input.value)
+    
+    n = integrantes_list.length
+    const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
+
+    const fragment = document.createDocumentFragment()
+    for(let i=0; i<n; i++){
+        let integrante_label = document.createElement('P')
+        let integrante_name = integrantes_list[i]
+        let integrante_exercise = list_to_str(sorted_exercises[i])
+
+        integrante_label.innerHTML = `<b>${integrante_name}:</b> ${integrante_exercise}`
+        fragment.appendChild(integrante_label)
+    }
+    
+    ejercicios_output.innerHTML = ""
+    ejercicios_output.appendChild(fragment)
+}
+

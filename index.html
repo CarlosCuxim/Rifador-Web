@@ -14,20 +14,24 @@
         <ul>
             <li>
                 <label for="Integrantes">Integrantes</label>
-                <input type="text" name="Integrantes">
+                <input type="text" name="Integrantes" id="input-integrantes">
                 </select>
             </li>
             
             <li>
                 <label>Ejercicios</label>
-                <input type="text" name="Ejercicios">
+                <input type="text" name="Ejercicios" id="input-ejercicios">
             </li>
 
             <li>
-                <input type="button" value="RIFAR">
+                <input type="button" value="RIFAR" onclick="rifar_button_event()">
             </li>
         </ul>
     </form>
+
+    <section id="output-ejercicios">
+
+    </section>
 
     <script src="./app.js"></script>
 </body>
