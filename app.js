@@ -6,6 +6,38 @@ function str_to_list(string) {
     return list
 }
 
+function range(a,b) {
+    if(!b) {
+        b = a; a = 0;
+    }
+    n = b-a
+    return [...Array(n).keys()].map(i=>i+a)
+}
+
+// Convierte un string con la notación de puntos suspensivos a una lista
+function str_dots_to_list(string) {
+    list = str_to_list(string)
+    new_list = []
+    while(list.includes("...")){
+        idx = list.findIndex(i=>i==="...")
+        a = Number(list[idx-1])
+        b = Number(list[idx+1])
+        list.splice(idx-1, 3)
+        new_list = [...new_list, ...range(a,b),b]
+    }
+    return new_list
+}
+
+
+function user_entry_to_list(string) {
+    if(string.includes("...")){
+        return str_dots_to_list(string)
+    } else {
+        return str_to_list
+    }
+}
+
+
 // Convierte una lista a string separada por comas
 function list_to_str(list) {
     let string = ""
@@ -20,7 +52,7 @@ function list_to_str(list) {
 }
 
 // Arroja un entero aleatorio del intervalo [a,b), o de [0,a), si b no es especificado.
-function random_int(a, b=null){
+function random_int(a, b){
     if(!b) {
         b = a; a = 0;
     }
@@ -65,8 +97,8 @@ const ejercicios_input = document.getElementById("input-ejercicios")
 const ejercicios_output = document.getElementById("output-ejercicios")
 
 function rifar_button_event(){
-    const integrantes_list = str_to_list(integrantes_input.value)
-    const ejercicios_list = str_to_list(ejercicios_input.value)
+    const integrantes_list = user_entry_to_list(integrantes_input.value)
+    const ejercicios_list = user_entry_to_list(ejercicios_input.value)
     
     n = integrantes_list.length
     const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
