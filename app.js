@@ -33,7 +33,7 @@ function user_entry_to_list(string) {
     if(string.includes("...")){
         return str_dots_to_list(string)
     } else {
-        return str_to_list
+        return str_to_list(string)
     }
 }
 
