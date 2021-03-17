@@ -10,13 +10,37 @@ body {
     background-color: var(--main-white-color);
     margin: 0px;
     padding: 0px;
+    height: 100vh;
     color: var(--main-dark-color);
+    overflow: overlay;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
     background-color: var(--main-dark-color);
     color: var(--main-white-color);
     padding: 50px 0px;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--main-blue-color);
 }
 
 header h1 {
@@ -106,12 +130,14 @@ form .rifar-button:active {
     width: 90%;
     background-color: var(--main-gray-color);
     border-radius: 10px;
+    text-align: justify;
+    margin-bottom: 20px;
 } 
 
 .ayuda-container {
     box-sizing: border-box;
     width: fit-content;
-    padding: 10px;
+    padding: 0px;
     margin: 20px auto;
     text-align: center;
 }
@@ -135,6 +161,38 @@ form .rifar-button:active {
 }
 
 .output h3 {
-    margin: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
     text-align: center;
 }
+
+.output h4 {
+    margin: 18px 15px;
+}
+
+.output li {
+    margin-right: 15px;
+}
+
+.output-ayuda {
+    max-width: 800px;
+}
+
+/* Scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: darkgray;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
+  }

@@ -10,32 +10,38 @@
 <body>
     <header>
         <h1>RIFADOR DE EJERCICIOS</h1>
-        <h3><i>By Carlos Cuxim</i></h3>
     </header>
 
-    <form>
-        <ul>
-            <li>
-                <label for="Integrantes">Integrantes</label>
-                <input type="text" name="Integrantes" id="input-integrantes">
-                </select>
-            </li>
-            
-            <li>
-                <label>Ejercicios</label>
-                <input type="text" name="Ejercicios" id="input-ejercicios">
-            </li>
+    <main>
+        <form>
+            <ul>
+                <li>
+                    <label for="Integrantes">Integrantes</label>
+                    <input type="text" name="Integrantes" id="input-integrantes">
+                    </select>
+                </li>
+                
+                <li>
+                    <label>Ejercicios</label>
+                    <input type="text" name="Ejercicios" id="input-ejercicios">
+                </li>
 
-            <li class="button-container">
-                <input class="rifar-button" type="button" value="RIFAR" onclick="rifar_button_event()">
-            </li>
-        </ul>
-    </form>
+                <li class="button-container">
+                    <input class="rifar-button" type="button" value="RIFAR" onclick="rifar_button_event()">
+                </li>
+            </ul>
+        </form>
 
-    <p class="ayuda-container"><input class="ayuda-button" class="rifar-button" type="button" value="¿Cómo funciona?" onclick="console.log('HOLA')"></p>
+        <p class="ayuda-container"><input class="ayuda-button" class="rifar-button" type="button" value="¿Cómo funciona?" onclick="ayuda_button_event()"></p>
 
-    <section id="output-ejercicios"></section>
+        <section id="output-ejercicios" class="output-ayuda"></section>
 
-    <script src="./app.js"></script>
+        <script src="./app.js"></script>
+    </main>
+
+    <footer>
+        Creado por <a href="https://github.com/CarlosCuxim" target="_blank">Carlos Cuxim.</a>
+    </footer>
 </body>
+
 </html>
