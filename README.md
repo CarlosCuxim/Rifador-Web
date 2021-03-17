@@ -27,7 +27,7 @@ ejemplo:
 Por cuestiones de redondeo, cuando los pasos no son enteros, es
 posible que la expresión decimal no sea correcta.
 
-#### Notación foreach<
+#### Notación foreach
 
 En el caso que se requiera expresiones un poco más complejas, es
 posible sustituir una variable en una expresión y que sea evaluada
