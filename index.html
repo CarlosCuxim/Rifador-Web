@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h1>Rifador de ejercicios</h1>
+    <header>
+        <h1>RIFADOR DE EJERCICIOS</h1>
+        <h3><i>By Carlos Cuxim</i></h3>
+    </header>
 
     <form>
         <ul>
@@ -23,15 +26,15 @@
                 <input type="text" name="Ejercicios" id="input-ejercicios">
             </li>
 
-            <li>
-                <input type="button" value="RIFAR" onclick="rifar_button_event()">
+            <li class="button-container">
+                <input class="rifar-button" type="button" value="RIFAR" onclick="rifar_button_event()">
             </li>
         </ul>
     </form>
 
-    <section id="output-ejercicios">
+    <p class="ayuda-container"><input class="ayuda-button" class="rifar-button" type="button" value="¿Cómo funciona?" onclick="console.log('HOLA')"></p>
 
-    </section>
+    <section id="output-ejercicios"></section>
 
     <script src="./app.js"></script>
 </body>

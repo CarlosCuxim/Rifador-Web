@@ -1,20 +1,58 @@
+:root {
+    --main-dark-color : #112d4e;
+    --main-blue-color : #3f72af;
+    --main-gray-color : #dbe2ef;
+    --main-white-color: #f9f7f7
+  }
+
 body {
     font-family: Arial, Ubuntu Helvetica, sans-serif;
+    background-color: var(--main-white-color);
+    margin: 0px;
+    padding: 0px;
+    color: var(--main-dark-color);
 }
 
-h1 {
+header {
+    background-color: var(--main-dark-color);
+    color: var(--main-white-color);
+    padding: 50px 0px;
+}
+
+header h1 {
     text-align: center;
+    margin: 0px;
+    margin-bottom: 10px;
 }
 
-section, form {
-    margin: 10px auto;
+header h3 {
+    text-align: center;
+    font-weight: normal;
+    margin: 0px;
+}
+
+form {
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0px auto;
+    margin-top: 20px;
     max-width: 500px;
     width: 90%;
+    background-color: var(--main-gray-color);
+    border-radius: 10px;
+}
+
+form label {
+    font-weight: bold;
 }
 
 
+section p {
+    margin: 15px
+}
+
 form ul {
-    margin: 5px;
+    margin: 0px;
     display: flex;
     flex-wrap: wrap;
     padding: 0px;
@@ -38,8 +76,65 @@ form input[type="text"] {
     height: 20px;
 }
 
-form select {
+form .rifar-button {
+    color: var(--main-white-color);
+    background-color: var(--main-blue-color);
+    border: none;
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    border-radius: 20px;
+    outline: none;
+}
+
+form .rifar-button:hover {
+    background-color: var(--main-dark-color);
+}
+
+form .rifar-button:active {
+    background-color: var(--main-blue-color);
+}
+
+.button-container {
+    margin-bottom: 0px;
+}
+
+.output {
     box-sizing: border-box;
-    width: 100%;
-    height: 20px;
+    padding: 20px;
+    margin: 0px auto;
+    max-width: 500px;
+    width: 90%;
+    background-color: var(--main-gray-color);
+    border-radius: 10px;
+} 
+
+.ayuda-container {
+    box-sizing: border-box;
+    width: fit-content;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.ayuda-button {
+    color: var(--main-white-color);
+    background-color: var(--main-blue-color);
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.ayuda-button:hover {
+    background-color: var(--main-dark-color);
+}
+
+ .ayuda-button:active {
+    background-color: var(--main-blue-color);
+}
+
+.output h3 {
+    margin: 15px;
+    text-align: center;
 }

@@ -171,7 +171,9 @@ function rifar_button_event(){
         fragment.appendChild(integrante_label)
     }
     
+    ejercicios_output.classList.add("output")
     ejercicios_output.innerHTML = ""
+
     ejercicios_output.appendChild(fragment)
 }
 
