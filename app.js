@@ -1,39 +1,62 @@
 // Convierte una string separada por comas a una lista
-function str_to_list(string) {
-    let list = string.split(',')
+function str_to_list(string, separator=',') {
+    let list = string.split(separator)
     list = list.map(i => i.trim())
     list = list.filter(i => i!=="")
     return list
 }
 
+// Función rango de python
 function range(a,b) {
     if(!b) {
         b = a; a = 0;
     }
-    n = b-a
-    return [...Array(n).keys()].map(i=>i+a)
+    return [...Array(b-a).keys()].map(i=>i+a)
 }
 
 // Convierte un string con la notación de puntos suspensivos a una lista
 function str_dots_to_list(string) {
-    list = str_to_list(string)
-    new_list = []
+    let list = str_to_list(string)
+    let new_list = []
     while(list.includes("...")){
-        idx = list.findIndex(i=>i==="...")
-        a = Number(list[idx-1])
-        b = Number(list[idx+1])
+        let idx = list.findIndex(i=>i==="...")
+        let a = Number(list[idx-1])
+        let b = Number(list[idx+1])
         list.splice(idx-1, 3)
         new_list = [...new_list, ...range(a,b),b]
     }
     return new_list
 }
 
+// Convierte un string con la notación foreach a una lista
+function str_foreach_to_list(string) {
+    //let new_list = []
+    let format = str_to_list(string, "foreach")[0]
+    let variable = str_to_list(str_to_list(string, "foreach")[1], "in")[0]
+    let list = str_to_list(str_to_list(string, "foreach")[1], "in")[1]
 
-function user_entry_to_list(string) {
+    list = evaluate_dots_notation(list.substring(1,list.length-1))
+    new_list = list.map(i=>format.replace(variable, i))
+
+    return new_list
+}
+
+S = "3./indice.2 foreach /indice in {1,...,10}"
+console.log(str_foreach_to_list(S))
+
+function evaluate_dots_notation(string){
     if(string.includes("...")){
         return str_dots_to_list(string)
     } else {
         return str_to_list(string)
+    }
+}
+
+function user_entry_to_list(string) {
+    if(string.includes("foreach")){
+        return str_foreach_to_list(string)
+    } else {
+        return evaluate_dots_notation(string)
     }
 }
 
