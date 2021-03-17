@@ -7,11 +7,19 @@ function str_to_list(string, separator=',') {
 }
 
 // Función rango de python
-function range(a,b) {
+function range(a,b, step=1) {
     if(!b) {
         b = a; a = 0;
     }
-    return [...Array(b-a).keys()].map(i=>i+a)
+    if (step===1) {    
+        return [...Array(Math.abs(b-a)).keys()].map(i=>i+a)
+    } else {
+        list = []
+        for(let i = a; i<=b; i+=step){
+            list.push(i)
+        }
+        return list
+    }
 }
 
 // Convierte un string con la notación de puntos suspensivos a una lista
@@ -20,29 +28,46 @@ function str_dots_to_list(string) {
     let new_list = []
     while(list.includes("...")){
         let idx = list.findIndex(i=>i==="...")
-        let a = Number(list[idx-1])
-        let b = Number(list[idx+1])
-        list.splice(idx-1, 3)
-        new_list = [...new_list, ...range(a,b),b]
+        let a = Number(list[idx-2])
+        let b = Number(list[idx-1])
+        let c = Number(list[idx+1])
+        if (!a) {
+            list.splice(idx-1, 3)
+            if (b<c) {
+                new_list = [...new_list, ...range(b,c),c]
+            } else {
+                new_list = [...new_list, ...range(c,b),c]
+            }
+            
+        } else {
+            list.splice(idx-2, 3)
+            if (a<c) {
+                new_list = [...new_list, ...range(a,c,b-a),c]
+            } else {
+                new_list = [...new_list, ...range(c,a,a-b),c]
+            }
+            
+        }
+        
     }
     return new_list
 }
 
+
+
 // Convierte un string con la notación foreach a una lista
 function str_foreach_to_list(string) {
-    //let new_list = []
     let format = str_to_list(string, "foreach")[0]
     let variable = str_to_list(str_to_list(string, "foreach")[1], "in")[0]
     let list = str_to_list(str_to_list(string, "foreach")[1], "in")[1]
 
     list = evaluate_dots_notation(list.substring(1,list.length-1))
-    new_list = list.map(i=>format.replace(variable, i))
+    let new_list = list.map(i=>format.replace(variable, i))
 
     return new_list
 }
 
-S = "3./indice.2 foreach /indice in {1,...,10}"
-console.log(str_foreach_to_list(S))
+
 
 function evaluate_dots_notation(string){
     if(string.includes("...")){
@@ -53,7 +78,9 @@ function evaluate_dots_notation(string){
 }
 
 function user_entry_to_list(string) {
-    if(string.includes("foreach")){
+    if (string.substring(0,2) === ">>") {
+        return eval(string.substring(2,string.length))
+    } else if(string.includes("foreach")){
         return str_foreach_to_list(string)
     } else {
         return evaluate_dots_notation(string)
