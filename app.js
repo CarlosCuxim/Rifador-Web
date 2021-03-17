@@ -45,10 +45,8 @@ function str_dots_to_list(string) {
                 new_list = [...new_list, ...range(a,c,b-a),c]
             } else {
                 new_list = [...new_list, ...range(c,a,a-b),c]
-            }
-            
-        }
-        
+            }   
+        }   
     }
     return new_list
 }
@@ -77,7 +75,9 @@ function evaluate_dots_notation(string){
     }
 }
 
-function user_entry_to_list(string) {
+
+
+function evaluate_user_entry(string) {
     if (string.substring(0,2) === ">>") {
         return eval(string.substring(2,string.length))
     } else if(string.includes("foreach")){
@@ -87,6 +87,14 @@ function user_entry_to_list(string) {
     }
 }
 
+function user_entry_to_list(string) {
+    let list = str_to_list(string, ";").map(i=>evaluate_user_entry(i))
+    let new_list = []
+    for(i of list) {
+        new_list = [...new_list, ...i]
+    }
+    return new_list
+}
 
 // Convierte una lista a string separada por comas
 function list_to_str(list) {
