@@ -16,7 +16,7 @@ espacios no importan. Por ejemplo:
 Dado que es común que se quiera repartir un rango de números, existe
 una forma más compacta de escribirlo. Para ello basta escribir:
 
-<center>&lang;a&rang;,[&lang;opc.&rang;,] ..., &lang;a&rang;</center>
+    &lang;a&rang;,[&lang;opc.&rang;,] ..., &lang;a&rang;
 
 Esto hará que automáticamente se escriban los números de
 &lang;a&rang; hasta &lang;b&rang;, si el número &lang;opc.&rang; es
@@ -37,7 +37,7 @@ En el caso que se requiera expresiones un poco más complejas, es
 posible sustituir una variable en una expresión y que sea evaluada
 en un conjunto de puntos. Para esto basta escribir:
 
-<center>&lang;expresión&rang; foreach &lang;comando&rang; in {&lang;lista&rang;}</center>
+    &lang;expresión&rang; foreach &lang;comando&rang; in {&lang;lista&rang;}
 
 Aquí &lang;expresión&rang; puede ser cualquier expresión que
 contenga a &lang;comando&rang; (y que, obviamente, no contenga la
@@ -67,7 +67,7 @@ requieran funciones aun más exóticas, existe la posibilidad de usar
 las funciones JavaScript para crear una lista. Para ello basta con
 escribir:
 
-<center>&gt;&gt;&lang;Comandos JavaScript&rang;</center>
+    &gt;&gt;&lang;Comandos JavaScript&rang;
 
 Hay que recalcar que &lang;Comandos JavaScript&rang; deben crear un
 Array, en caso contrario no se podrá ejecutar.
