@@ -16,11 +16,11 @@ espacios no importan. Por ejemplo:
 Dado que es común que se quiera repartir un rango de números, existe
 una forma más compacta de escribirlo. Para ello basta escribir:
 
-    &lang;a&rang;,[&lang;opc.&rang;,] ..., &lang;a&rang;
+    ⟨a⟩;,[⟨opc.⟩;,] ..., ⟨a⟩;
 
 Esto hará que automáticamente se escriban los números de
-&lang;a&rang; hasta &lang;b&rang;, si el número &lang;opc.&rang; es
-dado, los pasos serán de &lang;a&rang; - &lang;opc.&rang;. Por
+⟨a⟩; hasta ⟨b⟩;, si el número ⟨opc.⟩; es
+dado, los pasos serán de ⟨a⟩; - ⟨opc.⟩;. Por
 ejemplo:
 <ul>
     <li>1, ..., 5 se evaluará como 1, 2, 3, 4, 5.</li>
@@ -37,21 +37,21 @@ En el caso que se requiera expresiones un poco más complejas, es
 posible sustituir una variable en una expresión y que sea evaluada
 en un conjunto de puntos. Para esto basta escribir:
 
-    &lang;expresión&rang; foreach &lang;comando&rang; in {&lang;lista&rang;}
+    ⟨expresión⟩; foreach ⟨comando⟩; in {⟨lista⟩;}
 
-Aquí &lang;expresión&rang; puede ser cualquier expresión que
-contenga a &lang;comando&rang; (y que, obviamente, no contenga la
-palabra &ldquo;foreach&rdquo;), como curiosidad, también es posible
+Aquí ⟨expresión⟩; puede ser cualquier expresión que
+contenga a ⟨comando⟩; (y que, obviamente, no contenga la
+palabra “foreach”), como curiosidad, también es posible
 usar etiquetas HTML básicas.
 
 
-Así, &lang;comando&rang; será sustituido
-por cada valor que aparezca en &lang;lista&rang;, se recomienda que
-&lang;comando&rang; contenga un carácter especial para evitar
+Así, ⟨comando⟩; será sustituido
+por cada valor que aparezca en ⟨lista⟩;, se recomienda que
+⟨comando⟩; contenga un carácter especial para evitar
 sustituciones no deseadas.
 
 
-Para &lang;lista&rang;, los elementos
+Para ⟨lista⟩;, los elementos
 deben estar separados por comas, también es posible usar la notación
 con puntos suspensivos. Por ejemplo:
 <ul>
@@ -67,9 +67,9 @@ requieran funciones aun más exóticas, existe la posibilidad de usar
 las funciones JavaScript para crear una lista. Para ello basta con
 escribir:
 
-    &gt;&gt;&lang;Comandos JavaScript&rang;
+    >>⟨Comandos JavaScript⟩;
 
-Hay que recalcar que &lang;Comandos JavaScript&rang; deben crear un
+Hay que recalcar que ⟨Comandos JavaScript⟩; deben crear un
 Array, en caso contrario no se podrá ejecutar.
 
 
