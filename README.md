@@ -70,6 +70,6 @@ Array, en caso contrario no se podrá ejecutar.
 
 Es posible usar la función range(), cuyo funcionamiento es el mismo
 que en Python. Por ejemplo:
-* >>range(5) se evaluará como 0, 1, 2, 3, 4.
-* >>range(1,3,0.5) se evaluará como 1, 1.5, 2, 2.5.
-* >>range(5).map(i=>i**2) se evaluará como 0, 1, 4, 9, 16.
+* &gt;&gt;range(5) se evaluará como 0, 1, 2, 3, 4.
+* &gt;&gt;range(1,3,0.5) se evaluará como 1, 1.5, 2, 2.5.
+* &gt;&gt;range(5).map(i=>i**2) se evaluará como 0, 1, 4, 9, 16.
