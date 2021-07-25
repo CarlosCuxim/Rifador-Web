@@ -150,32 +150,43 @@ function divide_in_random_groups(list, n=1){
     return new_list
 }
 
+/* =============================================================================
+    FUNCIONAMIENTO DEL HTML
+============================================================================= */
+
 const integrantes_input = document.getElementById("input-integrantes")
 const ejercicios_input = document.getElementById("input-ejercicios")
 const ejercicios_output = document.getElementById("output-ejercicios")
 
+const ayuda_button = document.getElementById("ayuda-button")
+
 function rifar_button_event(){
     const integrantes_list = user_entry_to_list(integrantes_input.value)
     const ejercicios_list = user_entry_to_list(ejercicios_input.value)
-    
+
     n = integrantes_list.length
-    const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
 
-    const fragment = document.createDocumentFragment()
-    for(let i=0; i<n; i++){
-        let integrante_label = document.createElement('P')
-        let integrante_name = integrantes_list[i]
-        let integrante_exercise = list_to_str(sorted_exercises[i])
+    if(n===0){
+        console.log("Entrada inválida")
+    } else{
+        const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
 
-        integrante_label.innerHTML = `<b>${integrante_name}:</b> ${integrante_exercise}`
-        fragment.appendChild(integrante_label)
+        const fragment = document.createDocumentFragment()
+        for(let i=0; i<n; i++){
+            let integrante_label = document.createElement('P')
+            let integrante_name = integrantes_list[i]
+            let integrante_exercise = list_to_str(sorted_exercises[i])
+
+            integrante_label.innerHTML = `<b>${integrante_name}:</b> ${integrante_exercise}`
+            fragment.appendChild(integrante_label)
+        }
+        
+        ejercicios_output.classList.remove("output-ayuda")
+        ejercicios_output.classList.add("output")
+        ejercicios_output.innerHTML = ""
+
+        ejercicios_output.appendChild(fragment)
     }
-    
-    ejercicios_output.classList.remove("output-ayuda")
-    ejercicios_output.classList.add("output")
-    ejercicios_output.innerHTML = ""
-
-    ejercicios_output.appendChild(fragment)
 }
 
 mensaje_ayuda = `<h3>Instrucciones </h3>
@@ -283,8 +294,24 @@ mensaje_ayuda = `<h3>Instrucciones </h3>
     puede mezclar varios tipos de notaciones.
 </p>`
 
+let ayuda_activate = false
+
 function ayuda_button_event() {
-    ejercicios_output.classList.add("output")
-    ejercicios_output.classList.add("output-ayuda")
-    ejercicios_output.innerHTML = mensaje_ayuda
+    if(ayuda_activate){
+        ejercicios_output.classList.remove("output-ayuda")
+        ejercicios_output.classList.remove("output")
+        ejercicios_output.innerHTML = ""
+
+        ayuda_button.value = "¿Cómo funciona?"
+
+        ayuda_activate = false
+    } else {
+        ejercicios_output.classList.add("output")
+        ejercicios_output.classList.add("output-ayuda")
+        ejercicios_output.innerHTML = mensaje_ayuda
+
+        ayuda_button.value = "Ocultar"
+
+        ayuda_activate = true
+    }   
 }

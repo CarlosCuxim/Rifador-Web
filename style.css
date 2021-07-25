@@ -146,6 +146,7 @@ form .rifar-button:active {
     color: var(--main-white-color);
     background-color: var(--main-blue-color);
     border: none;
+    width: 170px;
     font-size: 1rem;
     padding: 10px 20px;
     border-radius: 20px;
