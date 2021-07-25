@@ -1,3 +1,9 @@
+/*
+================================================================================
+FUNCIONES MISCELÁNEAS
+================================================================================
+*/
+
 // Convierte una string separada por comas a una lista
 function str_to_list(string, separator=',') {
     let list = string.split(separator)
@@ -17,7 +23,7 @@ function range(a,b, step=1) {
         step = 1
     }
 
-    list = []
+    let list = []
     for(let i = a; i<b; i+=step){
         list.push(i)
     }
@@ -34,6 +40,38 @@ function fix_number_list(list, round=4) {
     return list
 }
 
+// Compara dos funciones dado su orden dentro de una lista
+function compare_by_list(a, b, list) {
+    let idx_a = list.indexOf(a)
+    let idx_b = list.indexOf(b)
+
+    if(idx_a === -1){
+        return idx_b-idx_a
+    } else {
+        if(idx_b === -1){
+            return idx_b
+        } else
+        return idx_a-idx_b
+    }
+}
+
+// Ordena una lista dada una lista maestra. La función modifica la lista
+function sort_by_list(list, master){
+    const list_map = (a,b) => compare_by_list(a, b, master)
+
+    list.sort(list_map)
+
+    return list
+}
+
+
+
+
+/*
+================================================================================
+FUNCIONES SORTEO
+================================================================================
+*/
 
 // Convierte un string con la notación de puntos suspensivos a una lista
 function str_dots_to_list(string) {
@@ -41,12 +79,10 @@ function str_dots_to_list(string) {
     let new_list = []
 
     while(list.includes("...")){
-        let idx = list.findIndex(i=>i==="...")
+        let idx = list.indexOf("...")
         let a = Number(list[idx-2])
         let b = Number(list[idx-1])
         let c = Number(list[idx+1])
-
-        console.log(a, b, c)
 
         if (!a) {
             list.splice(idx-1, 3)
@@ -69,8 +105,6 @@ function str_dots_to_list(string) {
             }   
         }   
     }
-
-    console.log(new_list)
 
     return new_list
 }
@@ -112,7 +146,7 @@ function evaluate_user_entry(string) {
 }
 
 function user_entry_to_list(string) {
-    let list = str_to_list(string, ";").map(i=>evaluate_user_entry(i))
+    let list = str_to_list(string, ";").map(evaluate_user_entry)
     let new_list = []
     for(i of list) {
         new_list = [...new_list, ...i]
@@ -170,13 +204,18 @@ function divide_in_random_groups(list, n=1){
         new_list[idx].push(remove_random_element(aux_list))
         idx = (idx + 1)%n
     }
-    new_list = reorder_list(new_list)
+    new_list = reorder_list(new_list).map(i => sort_by_list(i, list))
+
+    console.log(new_list)
+
     return new_list
 }
 
-/* =============================================================================
+/*
+================================================================================
     FUNCIONAMIENTO DEL HTML
-============================================================================= */
+================================================================================
+*/
 
 const integrantes_input = document.getElementById("input-integrantes")
 const ejercicios_input = document.getElementById("input-ejercicios")
