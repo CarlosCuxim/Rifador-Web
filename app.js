@@ -4,11 +4,12 @@ FUNCIONES MISCELÁNEAS
 ================================================================================
 */
 
-// Convierte una string separada por comas a una lista
+// Convierte un string separada por comas a una lista.
 function str_to_list(string, separator=',') {
     let list = string.split(separator)
     list = list.map(i => i.trim())
     list = list.filter(i => i!=="")
+    
     return list
 }
 
@@ -17,14 +18,12 @@ function range(a,b, step=1) {
     if(!b) {
         b = a; a = 0;
     }
-    
     // Se asegura que el valor de paso sea positivo
-    if(step<=0){
+    if(step<=0) {
         step = 1
     }
-
     let list = []
-    for(let i = a; i<b; i+=step){
+    for(let i = a; i<b; i+=step) {
         list.push(i)
     }
 
@@ -33,11 +32,7 @@ function range(a,b, step=1) {
 
 // Función que redondea los números dentro de una función
 function fix_number_list(list, round=4) {
-    for(let i=0; i<list.length; i++){
-        list[i] = Math.round(list[i]*10**round)/10**round
-    }
-
-    return list
+    return list.map(i => Math.round(i*10**round)/10**round)
 }
 
 // Compara dos funciones dado su orden dentro de una lista
@@ -45,10 +40,10 @@ function compare_by_list(a, b, list) {
     let idx_a = list.indexOf(a)
     let idx_b = list.indexOf(b)
 
-    if(idx_a === -1){
+    if(idx_a === -1) {
         return idx_b-idx_a
     } else {
-        if(idx_b === -1){
+        if(idx_b === -1) {
             return idx_b
         } else
         return idx_a-idx_b
@@ -56,15 +51,12 @@ function compare_by_list(a, b, list) {
 }
 
 // Ordena una lista dada una lista maestra. La función modifica la lista
-function sort_by_list(list, master){
+function sort_by_list(list, master) {
     const list_map = (a,b) => compare_by_list(a, b, master)
-
     list.sort(list_map)
 
     return list
 }
-
-
 
 
 /*
@@ -78,7 +70,7 @@ function str_dots_to_list(string) {
     let list = str_to_list(string)
     let new_list = []
 
-    while(list.includes("...")){
+    while(list.includes("...")) {
         let idx = list.indexOf("...")
         let a = Number(list[idx-2])
         let b = Number(list[idx-1])
@@ -118,18 +110,20 @@ function str_foreach_to_list(string) {
     let list = str_to_list(str_to_list(string, "foreach")[1], "in")[1]
 
     list = evaluate_dots_notation(list.substring(1,list.length-1))
-    let new_list = list.map(i=>format.replace(variable, i))
+    let new_list = list.map(i=>format.replaceAll(variable, i))
 
     return new_list
 }
 
 
+// Evalúa un string con la notación de puntos suspensivos
+function evaluate_dots_notation(string) {
+    let list = str_to_list(string)
 
-function evaluate_dots_notation(string){
-    if(string.includes("...")){
-        return str_dots_to_list(string)
+    if(list.indexOf("...") === -1) {
+        return list
     } else {
-        return str_to_list(string)
+        return str_dots_to_list(string)
     }
 }
 
@@ -138,7 +132,7 @@ function evaluate_dots_notation(string){
 function evaluate_user_entry(string) {
     if (string.substring(0,2) === ">>") {
         return eval(string.substring(2,string.length))
-    } else if(string.includes("foreach")){
+    } else if(string.includes("foreach")) {
         return str_foreach_to_list(string)
     } else {
         return evaluate_dots_notation(string)
@@ -158,7 +152,7 @@ function user_entry_to_list(string) {
 function list_to_str(list) {
     let string = ""
     for(let i = 0; i<list.length; i++) {
-        if(i===0){
+        if(i===0) {
             string = string + String(list[i])
         } else {
             string = string + ', ' + String(list[i])
@@ -168,7 +162,7 @@ function list_to_str(list) {
 }
 
 // Arroja un entero aleatorio del intervalo [a,b), o de [0,a), si b no es especificado.
-function random_int(a, b){
+function random_int(a, b) {
     if(!b) {
         b = a; a = 0;
     }
@@ -177,7 +171,7 @@ function random_int(a, b){
 }
 
 // Remueve un elemento aleatorio de una lista, y lo retorna
-function remove_random_element(list){
+function remove_random_element(list) {
     let idx = random_int(list.length)
     let element = list[idx]
     list.splice(idx, 1)
@@ -185,31 +179,30 @@ function remove_random_element(list){
 }
 
 // Reordena una lista
-function reorder_list(list){
+function reorder_list(list) {
     let new_list = []
     let aux_list = [...list]
     let n = list.length
-    while (new_list.length<n){
+    while (new_list.length<n) {
         new_list.push(remove_random_element(aux_list))
     }
     return new_list
 }
 
 // Divide los elementos de una lista en n grupos de manera aleatoria
-function divide_in_random_groups(list, n=1){
+function divide_in_random_groups(list, n=1) {
     let new_list = [...Array(n)].map(i=>[])
     let aux_list = [...list]
     let idx = 0
-    while (aux_list.length!==0){
+    while (aux_list.length!==0) {
         new_list[idx].push(remove_random_element(aux_list))
         idx = (idx + 1)%n
     }
     new_list = reorder_list(new_list).map(i => sort_by_list(i, list))
 
-    console.log(new_list)
-
     return new_list
 }
+
 
 /*
 ================================================================================
@@ -220,40 +213,7 @@ function divide_in_random_groups(list, n=1){
 const integrantes_input = document.getElementById("input-integrantes")
 const ejercicios_input = document.getElementById("input-ejercicios")
 const ejercicios_output = document.getElementById("output-ejercicios")
-
 const ayuda_button = document.getElementById("ayuda-button")
-
-function rifar_button_event(){
-    const integrantes_list = user_entry_to_list(integrantes_input.value)
-    const ejercicios_list = user_entry_to_list(ejercicios_input.value)
-
-    n = integrantes_list.length
-
-    if(n===0){
-        console.log("Entrada inválida")
-    } else{
-        const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
-
-        const fragment = document.createDocumentFragment()
-        for(let i=0; i<n; i++){
-            let integrante_label = document.createElement('P')
-            let integrante_name = integrantes_list[i]
-            let integrante_exercise = list_to_str(sorted_exercises[i])
-
-            integrante_label.innerHTML = `<b>${integrante_name}:</b> ${integrante_exercise}`
-            fragment.appendChild(integrante_label)
-        }
-        
-        ejercicios_output.classList.remove("output-ayuda")
-        ejercicios_output.classList.add("output")
-        ejercicios_output.innerHTML = ""
-
-        ejercicios_output.appendChild(fragment)
-
-        ayuda_button.value = "¿Cómo funciona?"
-        ayuda_activate = false
-    }
-}
 
 mensaje_ayuda = `<h3>Instrucciones </h3>
 <p>
@@ -362,8 +322,40 @@ mensaje_ayuda = `<h3>Instrucciones </h3>
 
 let ayuda_activate = false
 
+function rifar_button_event() {
+    const integrantes_list = user_entry_to_list(integrantes_input.value)
+    const ejercicios_list = user_entry_to_list(ejercicios_input.value)
+
+    let n = integrantes_list.length
+
+    if(n===0) {
+        console.log("Entrada inválida")
+    } else{
+        const sorted_exercises = divide_in_random_groups(ejercicios_list, n)
+
+        const fragment = document.createDocumentFragment()
+        for(let i=0; i<n; i++) {
+            let integrante_label = document.createElement('P')
+            let integrante_name = integrantes_list[i]
+            let integrante_exercise = list_to_str(sorted_exercises[i])
+
+            integrante_label.innerHTML = `<b>${integrante_name}:</b> ${integrante_exercise}`
+            fragment.appendChild(integrante_label)
+        }
+        
+        ejercicios_output.classList.remove("output-ayuda")
+        ejercicios_output.classList.add("output")
+        ejercicios_output.innerHTML = ""
+
+        ejercicios_output.appendChild(fragment)
+
+        ayuda_button.value = "¿Cómo funciona?"
+        ayuda_activate = false
+    }
+}
+
 function ayuda_button_event() {
-    if(ayuda_activate){
+    if(ayuda_activate) {
         ejercicios_output.classList.remove("output-ayuda")
         ejercicios_output.classList.remove("output")
         ejercicios_output.innerHTML = ""
