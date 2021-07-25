@@ -11,43 +11,67 @@ function range(a,b, step=1) {
     if(!b) {
         b = a; a = 0;
     }
-    if (step===1) {    
-        return [...Array(Math.abs(b-a)).keys()].map(i=>i+a)
-    } else {
-        list = []
-        for(let i = a; i<=b; i+=step){
-            list.push(i)
-        }
-        return list
+    
+    // Se asegura que el valor de paso sea positivo
+    if(step<=0){
+        step = 1
     }
+
+    list = []
+    for(let i = a; i<b; i+=step){
+        list.push(i)
+    }
+
+    return list
 }
+
+// Función que redondea los números dentro de una función
+function fix_number_list(list, round=4) {
+    for(let i=0; i<list.length; i++){
+        list[i] = Math.round(list[i]*10**round)/10**round
+    }
+
+    return list
+}
+
 
 // Convierte un string con la notación de puntos suspensivos a una lista
 function str_dots_to_list(string) {
     let list = str_to_list(string)
     let new_list = []
+
     while(list.includes("...")){
         let idx = list.findIndex(i=>i==="...")
         let a = Number(list[idx-2])
         let b = Number(list[idx-1])
         let c = Number(list[idx+1])
+
+        console.log(a, b, c)
+
         if (!a) {
             list.splice(idx-1, 3)
             if (b<c) {
-                new_list = [...new_list, ...range(b,c),c]
+                let fixed_range = fix_number_list(range(b,c))
+                new_list = [...new_list, ...fixed_range, c]
             } else {
-                new_list = [...new_list, ...range(c,b),c]
+                let fixed_range = fix_number_list(range(c,b))
+                new_list = [...new_list, ...fixed_range, c]
             }
             
         } else {
             list.splice(idx-2, 3)
             if (a<c) {
-                new_list = [...new_list, ...range(a,c,b-a),c]
+                let fixed_range = fix_number_list(range(a,c,b-a))
+                new_list = [...new_list, ...fixed_range, c]
             } else {
-                new_list = [...new_list, ...range(c,a,a-b),c]
+                let fixed_range = fix_number_list(range(c,a,a-b))
+                new_list = [...new_list, ...fixed_range, c]
             }   
         }   
     }
+
+    console.log(new_list)
+
     return new_list
 }
 
