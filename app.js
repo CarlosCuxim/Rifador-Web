@@ -186,6 +186,9 @@ function rifar_button_event(){
         ejercicios_output.innerHTML = ""
 
         ejercicios_output.appendChild(fragment)
+
+        ayuda_button.value = "¿Cómo funciona?"
+        ayuda_activate = false
     }
 }
 
