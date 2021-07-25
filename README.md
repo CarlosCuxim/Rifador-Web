@@ -54,7 +54,6 @@ con puntos suspensivos. Por ejemplo:
 * A#1#1 foreach #1 in {1,...,5}  se evaluará como A11, A22, A33, A44, A55.
 * &lt;i&gt;1.n&lt;/i&gt; foreach n in {1,2,3} se evaluará como <i>1.1</i>, <i>1.2</i>, <i>1.3</i>.
 
-
 ### Comandos JavaScript
 
 En un caso extremo donde no sea posible usar el foreach, o se
@@ -73,3 +72,13 @@ que en Python. Por ejemplo:
 * &gt;&gt;range(5) se evaluará como 0, 1, 2, 3, 4.
 * &gt;&gt;range(1,3,0.5) se evaluará como 1, 1.5, 2, 2.5.
 * &gt;&gt;range(5).map(i=>i**2) se evaluará como 0, 1, 4, 9, 16.
+
+### Concatenación de listas
+
+Por ultimo, en el caso que se quiera una lista compuesta de varios conjuntos de
+listas, es posible crearlo simplemente separando cada lista con un punto y coma:
+
+    ⟨Lista 1⟩ ; ⟨Lista 2⟩ ; ⟨Lista 3⟩ ; ...
+
+Todas las notaciones mencionadas anteriormente funcionan, por lo que se puede
+mezclar varios tipos de notaciones.

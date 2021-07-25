@@ -268,7 +268,20 @@ mensaje_ayuda = `<h3>Instrucciones </h3>
     <li>&gt;&gt;range(5) se evaluará como 0, 1, 2, 3, 4.</li>
     <li>&gt;&gt;range(1,3,0.5) se evaluará como 1, 1.5, 2, 2.5.</li>
     <li>&gt;&gt;range(5).map(i=&gt;i**2) se evaluará como 0, 1, 4, 9, 16.</li>
-</ul>`
+</ul>
+<h4>Concatenación de listas</h4>
+<p>
+    Por ultimo, en el caso que se quiera una lista compuesta de varios conjuntos
+    de listas, es posible crearlo simplemente separando cada lista con un punto
+    y coma:
+</p>
+<center>
+    &lang;Lista 1&rang; ; &lang;Lista 2&rang; ; &lang;Lista 3&rang; ; ...
+</center>
+<p>
+    Todas las notaciones mencionadas anteriormente funcionan, por lo que se
+    puede mezclar varios tipos de notaciones.
+</p>`
 
 function ayuda_button_event() {
     ejercicios_output.classList.add("output")
